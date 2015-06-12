@@ -11,6 +11,6 @@ class Estufa(db.Model):
 
 class Medida(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    estufa_id = db.Column(db.Integer, db.ForeignKey('estufa.id')) 
+    estufa_id = db.Column(db.Integer, db.ForeignKey('Estufa.id')) 
     umidade = db.Column(db.Float)
     temperatura = db.Column(db.Float)
