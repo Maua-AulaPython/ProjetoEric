@@ -3,21 +3,21 @@ from flask.ext.sqlalchemy import SQLAlchemy
 import json
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mister.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Medidas.db'
+db = SQLAlchemy(app)
 from model import *
 
 @app.route('/')
 def index():
-	return("Hello Sheldon. Para corrigir nosso trabalho sem problemas, nossas rotas são [/mostrar], [/estufa/new], [/medidas/new] !!")
+	return("Hello Sheldon. Para corrigir nosso trabalho sem problemas, nossas rotas são [/mostrar], [/estufa/new], [/medidas/new]!!")
 	
 @app.route('/mostrar', methods = ['GET'])
 def mostraValores():
     medidas = []
-	for i in Medida.query.all():
-		print (i.id, i.id_estufa, i.localizacao, i.temperatura, i.umidade)
-        medidas.append({'id': i.id, 'id_estufa': i.id_estufa, 'localizacao': i.localizacao, 'temperatura':i.temperatura, 'umidade':i.umidademe})
-
-	return	json.dumps(medidas)
+    for i in Medida.query.all():
+        print(i.id,i.id_estufa,i.localizacao,i.temperatura,i.umidade)
+        medidas.append({'id': i.id, 'id_estufa': i.id_estufa, 'localizacao': i.localizacao, 'temperatura':i.temperatura, 'umidade':i.umidade})
+    return	json.dumps(medidas)
 
 @app.route('/estufa/new', methods = ['POST'])
 def estufa_new():
